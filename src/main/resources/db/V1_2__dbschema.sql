@@ -1,0 +1,8 @@
+CREATE TABLE Client
+(
+  id     INTEGER IDENTITY,
+  name   VARCHAR(50) NOT NULL,
+  active BOOLEAN DEFAULT TRUE
+);
+
+INSERT INTO Client VALUES (1, 'Dmitry', TRUE),(2,'Ivan', TRUE );
