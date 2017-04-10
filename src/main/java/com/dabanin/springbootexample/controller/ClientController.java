@@ -2,13 +2,11 @@ package com.dabanin.springbootexample.controller;
 
 import com.dabanin.springbootexample.dto.ClientDTO;
 import com.dabanin.springbootexample.service.ClientService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Created by D.Abanin on 06.04.2017.
@@ -16,19 +14,16 @@ import java.util.stream.Collectors;
 @RestController
 public class ClientController {
 
+    private ClientService clientService;
+
     @Autowired
-    public ClientController(ModelMapper modelMapper, ClientService clientService) {
-        this.modelMapper = modelMapper;
+    public ClientController(ClientService clientService) {
         this.clientService = clientService;
     }
 
-    private ClientService clientService;
-
-    private ModelMapper modelMapper;
-
-    @RequestMapping("/client/getAll")
+    @RequestMapping("/client/get/")
     public List<ClientDTO> getAllClients(){
-        return clientService.getAllClients().stream().map(client -> modelMapper.map(client, ClientDTO.class)).collect(Collectors.toList());
+        return clientService.getAllClients();
     }
 
 

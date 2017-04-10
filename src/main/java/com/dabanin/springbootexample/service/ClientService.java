@@ -1,5 +1,6 @@
 package com.dabanin.springbootexample.service;
 
+import com.dabanin.springbootexample.dto.ClientDTO;
 import com.dabanin.springbootexample.entity.Client;
 import com.dabanin.springbootexample.repository.ClientRepository;
 import org.modelmapper.ModelMapper;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by D.Abanin on 06.04.2017.
@@ -15,18 +17,20 @@ import java.util.List;
 @Service
 public class ClientService {
 
-    @Autowired
-    public ClientService(ClientRepository clientRepository, ModelMapper modelMapper) {
-        this.clientRepository = clientRepository;
-    }
+    private ModelMapper modelMapper;
 
     private ClientRepository clientRepository;
 
-    public List<Client> getAllClients(){
+    @Autowired
+    public ClientService(ClientRepository clientRepository, ModelMapper modelMapper) {
+        this.clientRepository = clientRepository;
+        this.modelMapper = modelMapper;
+    }
+
+    public List<ClientDTO> getAllClients(){
         List<Client> result = new ArrayList<>();
         clientRepository.findAll().forEach(result::add);
-        return result;
-
+        return result.stream().map(client -> modelMapper.map(client, ClientDTO.class)).collect(Collectors.toList());
     }
 
 }
