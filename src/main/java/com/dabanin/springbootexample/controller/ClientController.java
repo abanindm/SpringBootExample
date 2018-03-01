@@ -12,6 +12,7 @@ import java.util.List;
  * Created by D.Abanin on 06.04.2017.
  */
 @RestController
+@RequestMapping("/client")
 public class ClientController {
 
     private ClientService clientService;
@@ -21,7 +22,7 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @RequestMapping("/client/get/")
+    @RequestMapping("")
     public List<ClientDTO> getAllClients(){
         return clientService.getAllClients();
     }

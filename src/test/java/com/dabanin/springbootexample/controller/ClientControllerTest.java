@@ -24,6 +24,6 @@ public class ClientControllerTest {
 
     @Test
     public void getAllClients() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/client/get/")).andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders.get("/client")).andExpect(status().isOk());
     }
 }
